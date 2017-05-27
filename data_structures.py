@@ -14,22 +14,22 @@ import collections
 class Vertex:
     def __init__(self, node):
         self.id = node
-        self.adjacent = {}
+        self.adjacent_weight = {}
 
     def __str__(self):
-        return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent])
+        return str(self.id) + ' adjacent_weight: ' + str([x.id for x in self.adjacent_weight])
 
     def add_neighbor(self, neighbor, weight=0):
-        self.adjacent[neighbor] = weight
+        self.adjacent_weight[neighbor] = weight
 
     def get_connections(self):
-        return self.adjacent.keys()
+        return self.adjacent_weight.keys()
 
     def get_id(self):
         return self.id
 
     def get_weight(self, neighbor):
-        return self.adjacent[neighbor]
+        return self.adjacent_weight[neighbor]
 
 
 class Graph:
@@ -51,6 +51,12 @@ class Graph:
         new_vertex = Vertex(node)
         self.vertices_dict[node] = new_vertex
         return new_vertex
+
+    def remove_vertex(self, node):
+        if node in self.vertices_dict:
+            self.num_vertices = self.num_vertices - 1
+            removed_vertex = self.vertices_dict.pop(node)
+            return removed_vertex
 
     def get_vertex(self, n):
         if n in self.vertices_dict:

@@ -51,17 +51,15 @@ def main():
         for i in range(nro_vertices):
             matrix[i] = [float(n) for n in input().split()]
         
-        g = create_structures(matrix, nro_vertices)
-
-        print (g)
-
+        G = create_structures(matrix, nro_vertices)
+        #print (G)
         if (sys.argv[1] == "-b"):
-            for v in g:
-                BFS(g, v)
+            for v in G:
+                BFS(G, v)
 
         elif (sys.argv[1] == "-d"):
-            #print(g)
-            pass
+            for v in G:
+                dijkstra(G, v)
         else:
              raise ValueError("Choose an algorithm to use: \n -b: BFS; \n -d: Dijkstra; \n")
 
@@ -75,8 +73,8 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-    except:
-        print("Error: Unexpected error happened.")
+#    except:
+#        print("Error: Unexpected error happened.")
 
 
 
