@@ -3,11 +3,11 @@
 #   10/0091008 - Aline Lais Gomes Tavares
 #
 #    Para executar: 
-#      BFS:        python aim.py
-#      Dijkstra:   python dijkstra.py
+#      BFS:             python main.py -b
+#      Dijkstra:        python main.py -d
+#      Bellman-Ford:    python main.py -bf
 #
 
-# todo
 
 import math
 import copy

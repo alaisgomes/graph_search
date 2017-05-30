@@ -1,6 +1,12 @@
-#   Univers_idade de Brasilia
+#   Universidade de Brasilia
 #   TAG - Teoria e Aplicacao de Grafos
 #   10/0091008 - Aline Lais Gomes Tavares
+#
+#    Para executar: 
+#      BFS:             python main.py -b
+#      Dijkstra:        python main.py -d
+#      Bellman-Ford:    python main.py -bf
+#
 
 import json
 import collections
