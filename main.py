@@ -6,19 +6,21 @@
 #      BFS:             python main.py -b
 #      Dijkstra:        python main.py -d
 #      Bellman-Ford:    python main.py -bf
+#    Uma opcao extra pode ser utilizada passando o arg -reg 
+#        se deseja que o input seja interpretado como grafo 
+#        nao-orientado regular.
 #
 #
 
 import sys
 from data_structures import Tree, Vertex, Graph
-from dijkstra import dijkstra
+from dijkstra import dijkstra, bellman_ford
 from bfs import BFS
+import collections
 
 
 def print_structures(g):
     for v in g:
-        BFS(g, v)
-        break
         for w in v.get_connections():
             v_id = v.get_id()
             wid = w.get_id()
@@ -27,13 +29,17 @@ def print_structures(g):
 
 def create_structures(matrix, n):
     g = Graph()
+
+    if ("-reg" in sys.argv):
+        g.set_direction(False) # if undirected graph
+
     try:
         for i in range(n):
             g.add_vertex(i+1)
 
         for i in range(n):
             for j in range(n):
-                if matrix[i][j] > 0:
+                if matrix[i][j] != 0:
                     g.add_edge(i+1, j+1, matrix[i][j])
 
         return g
@@ -54,16 +60,25 @@ def main():
             matrix[i] = [float(n) for n in input().split()]
         
         G = create_structures(matrix, nro_vertices)
-        #print (G)
-        if (sys.argv[1] == "-b"):
+
+        #print_structures(G)
+
+        if ("-b" in sys.argv):
             for v in G:
                 BFS(G, v)
 
-        elif (sys.argv[1] == "-d"):
+        elif ("-d" in sys.argv):
             for v in G:
-                dijkstra(G, v)
+                print(dijkstra(G, v))
+
+        elif ("-bf" in sys.argv):
+            for v in G:
+                res = bellman_ford(G,v)
+                if res:
+                    print (res)
+
         else:
-             raise ValueError("Choose an algorithm to use: \n -b: BFS; \n -d: Dijkstra; \n")
+            raise ValueError("Choose an algorithm to use: \n -b: BFS; \n -d: Dijkstra; \n")
 
 
     except ValueError as e:

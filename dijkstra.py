@@ -24,7 +24,7 @@ def initialize_single_source(G, s):
         d[v_id] = math.inf
         pi[v_id] = None
 
-    d[s.get_id()] = 0
+    d[s.get_id()] = 0.0
 
 
 
@@ -45,9 +45,8 @@ def extract_min(queue, s):
 def relax(u, v):
     v_id = v.get_id()
     u_id = u.get_id()
-    
-    if d[v_id] > d[u_id] + u.adjacent_weight[v]:
-        d[v_id] = d[u_id] + u.adjacent_weight[v]
+    if d[v_id] > d[u_id] + u.get_weight(v):
+        d[v_id] = d[u_id] + u.get_weight(v)
         pi[v_id] = u_id
 
 
@@ -63,13 +62,40 @@ def dijkstra(G, s):
 
     while queue.get_vertices():
         u = extract_min(queue, s)
-        u_id = u.get_id()
-        S.append(u_id)
+        if (u):
+            u_id = u.get_id()
+            S.append(u_id)
 
+            for v in u.get_connections():
+                relax(u, v)
+        else:
+            break
+
+    return pi
+
+def bellman_ford(G, s):
+    initialize_single_source(G, s)
+
+    #G.reorder_graph(s.get_id())
+
+    for u in G:
         for v in u.get_connections():
             relax(u, v)
 
-    print (pi)
+    #print (pi)
+
+    for u in G:
+        for v in u.get_connections():
+            u_id = u.get_id()
+            v_id = v.get_id()
+
+            if d[v_id] > float(d[u_id] + u.get_weight(v)) and d[u_id] != float(math.inf):
+                print ("{} > {} + {} = {}\
+                    ".format(d[v_id], d[u_id], u.get_weight(v), float(d[u_id] + u.get_weight(v))))
+
+                return False
+
+    return pi
 
 
 

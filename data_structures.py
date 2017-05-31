@@ -18,9 +18,9 @@ class Vertex:
         self.adjacent_weight = {}
 
     def __str__(self):
-        return str(self.id) + ' adjacent_weight: ' + str([x.id for x in self.adjacent_weight])
+        return str(self.id) + ' adjacent: ' + str([x.id for x in self.adjacent_weight])
 
-    def add_neighbor(self, neighbor, weight=0):
+    def add_neighbor(self, neighbor, weight=0.0):
         self.adjacent_weight[neighbor] = weight
 
     def get_connections(self):
@@ -34,9 +34,10 @@ class Vertex:
 
 
 class Graph:
-    def __init__(self):
-        self.vertices_dict = {}
+    def __init__(self, direction=True):
+        self.vertices_dict = collections.OrderedDict()
         self.num_vertices = 0
+        self.direction = direction
 
     def __iter__(self):
         return iter(self.vertices_dict.values())
@@ -46,6 +47,9 @@ class Graph:
         for v in self:
             string = string + "#{} node => {}\n".format(v.get_id(), self.vertices_dict[v.get_id()])
         return string
+
+    def set_direction(self, direction):
+        self.direction = direction
 
     def add_vertex(self, node):
         self.num_vertices = self.num_vertices + 1
@@ -65,17 +69,25 @@ class Graph:
         else:
             return None
 
-    def add_edge(self, frm, to, cost=0.0):
+    def add_edge(self, frm, to, cost=-0.0):
         if frm not in self.vertices_dict:
             self.add_vertex(frm)
         if to not in self.vertices_dict:
             self.add_vertex(to)
 
-        self.vertices_dict[frm].add_neighbor(self.vertices_dict[to], cost)
-        self.vertices_dict[to].add_neighbor(self.vertices_dict[frm], cost)
+        if (self.direction):
+            self.vertices_dict[frm].add_neighbor(self.vertices_dict[to], cost)
+        else:
+            self.vertices_dict[frm].add_neighbor(self.vertices_dict[to], cost)
+            self.vertices_dict[to].add_neighbor(self.vertices_dict[frm], cost)
 
     def get_vertices(self):
         return self.vertices_dict.keys()
+
+    def reorder_graph(self, vertex_key):
+        self.vertices_dict.move_to_end(vertex_key,last=False)
+
+        
 
 
 class Tree():
