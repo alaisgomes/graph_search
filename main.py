@@ -65,20 +65,23 @@ def main():
 
         if ("-b" in sys.argv):
             for v in G:
-                BFS(G, v)
+                print ("s = {}. BFS() return:\n {} \n \
+                    ".format(v.get_id(), BFS(G, v)))
 
         elif ("-d" in sys.argv):
             for v in G:
-                print(dijkstra(G, v))
+                print ("s = {}. dijkstra() return:\n {} \n \
+                    ".format(v.get_id(), dijkstra(G, v)))
 
         elif ("-bf" in sys.argv):
             for v in G:
-                res = bellman_ford(G,v)
-                if res:
-                    print (res)
+                print ("s = {}. bellman_ford() return:\n {} \n \
+                    ".format(v.get_id() , bellman_ford(G,v))) 
+                
 
         else:
-            raise ValueError("Choose an algorithm to use: \n -b: BFS; \n -d: Dijkstra; \n")
+            raise ValueError("Choose an algorithm to use:\n \
+                            -b: BFS; \n -d: Dijkstra; \n")
 
 
     except ValueError as e:
@@ -90,8 +93,8 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-#    except:
-#        print("Error: Unexpected error happened.")
+    except:
+        print("Error: Unexpected error happened.")
 
 
 

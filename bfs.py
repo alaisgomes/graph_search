@@ -51,4 +51,4 @@ def BFS(G, s):
 
         color[u_id] = 2
 
-    print(tree)
+    return tree
