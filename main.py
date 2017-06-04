@@ -6,17 +6,16 @@
 #      BFS:             python main.py -b
 #      Dijkstra:        python main.py -d
 #      Bellman-Ford:    python main.py -bf
-#    Uma opcao extra pode ser utilizada passando o arg -reg 
-#        se deseja que o input seja interpretado como grafo 
-#        nao-orientado regular.
-#
+#      Floyd-Warshall:  python main.py -fw
 #
 
 import sys
+import collections
+import math
 from data_structures import Tree, Vertex, Graph
 from dijkstra import dijkstra, bellman_ford
 from bfs import BFS
-import collections
+from floyd_warshall import floyd_warshall
 
 
 def print_structures(g):
@@ -28,25 +27,36 @@ def print_structures(g):
 
 
 def create_structures(matrix, n):
-    g = Graph()
 
-    if ("-reg" in sys.argv):
-        g.set_direction(False) # if undirected graph
-
-    try:
-        for i in range(n):
-            g.add_vertex(i+1)
-
+    if ("-fw" in sys.argv):
+        g = [[float(math.inf) for i in range(n)] for j in range(n)]
         for i in range(n):
             for j in range(n):
+                if (i == j):
+                    g[i][j] = 0
                 if matrix[i][j] != 0:
-                    g.add_edge(i+1, j+1, matrix[i][j])
-
+                    g[i][j] = matrix[i][j]
         return g
 
+    else:
+        g = Graph()
 
-    except IndexError as e:
-        print (e)
+        if ("-reg" in sys.argv):
+            g.set_direction(False) # if undirected graph
+
+        try:
+            for i in range(n):
+                g.add_vertex(i+1)
+
+            for i in range(n):
+                for j in range(n):
+                    if matrix[i][j] != 0:
+                        g.add_edge(i+1, j+1, matrix[i][j])
+
+            return g
+
+        except IndexError as e:
+            print (e)
 
     
 
@@ -76,12 +86,15 @@ def main():
         elif ("-bf" in sys.argv):
             for v in G:
                 print ("s = {}. bellman_ford() return:\n {} \n \
-                    ".format(v.get_id() , bellman_ford(G,v))) 
+                    ".format(v.get_id(), bellman_ford(G,v))) 
+
+        elif ("-fw" in sys.argv):
+            floyd_warshall(G) 
                 
 
         else:
             raise ValueError("Choose an algorithm to use:\n \
-                            -b: BFS; \n -d: Dijkstra; \n")
+                            -b: BFS; \n -d: Dijkstra; \n -bf: Bellman-Ford;\n -fw: Floyd-Warshall\n")
 
 
     except ValueError as e:
@@ -93,8 +106,8 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-    except:
-        print("Error: Unexpected error happened.")
+#    except:
+#        print("Error: Unexpected error happened.")
 
 
 
