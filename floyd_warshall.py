@@ -42,7 +42,7 @@ def print_all_paths(PI, i, j):
 
 
 def floyd_warshall(W):
-    global s
+    global s, error
 
     n = len(W)
     D = W
@@ -58,6 +58,7 @@ def floyd_warshall(W):
     for i in range(n):
         for j in range(n):
             s = ""
+            error = False
             print_all_paths(PI, i, j)
             if not error:
                 print("P({}, {}): {} \n".format(i+1, j+1, s))
