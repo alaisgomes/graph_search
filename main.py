@@ -17,7 +17,6 @@ from dijkstra import dijkstra, bellman_ford
 from bfs import BFS
 from floyd_warshall import floyd_warshall
 
-
 def print_structures(g):
     for v in g:
         for w in v.get_connections():
@@ -106,8 +105,8 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-#    except:
-#        print("Error: Unexpected error happened.")
+    except:
+        print("Error: Unexpected error happened.")
 
 
 
