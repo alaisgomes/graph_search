@@ -12,10 +12,11 @@
 import sys
 import collections
 import math
-from data_structures import Tree, Vertex, Graph
-from dijkstra import dijkstra, bellman_ford
-from bfs import BFS
-from floyd_warshall import floyd_warshall
+
+from search.data_structures import Tree, Vertex, Graph
+from search.dijkstra import dijkstra, bellman_ford
+from search.bfs import BFS
+from search.floyd_warshall import floyd_warshall
 
 def print_structures(g):
     for v in g:
@@ -105,8 +106,8 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-    except:
-        print("Error: Unexpected error happened.")
+    # except:
+    #     print("Error: Unexpected error happened.")
 
 
 
