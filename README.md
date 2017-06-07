@@ -16,5 +16,5 @@
 	* fw for Ford-Warshall
 * example using _Dijkstra_ with input file _g3.in_:
 ```sh
-python3 ain.py -d < input/g3.in	
+python3 main.py -d < input/g3.in	
 ```
