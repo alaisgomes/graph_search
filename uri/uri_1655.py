@@ -4,79 +4,43 @@
 #   Executar:
 #       python uri_1655.py < input
 
-import math
-
-s = ""
-
-def print_all_paths(PI, i, j):
-    global s
-    try:
-        if i == j:
-            s += " {}".format(i+1)
-        elif PI[i][j] == None:
-            print("There's no path between {} and {}".format(i+1, j+1))
-        else:
-            print_all_paths(PI, i, PI[i][j] - 1)
-            s += " {}".format(j+1)
-
-    except RecursionError as e:
-        print("Error: {}\n".format(e))
-
-def init(W, n):
-    PI = [[None for i in range(n)] for j in range(n)]
-    g = [[-math.inf for i in range(n)] for j in range(n)]
-
-    for i in range(n):
-        for j in range(n):
-            if (i == j):
-                g[i][j] = 0.0
-            if (W[i][j] != 0):
-                g[i][j] = -W[i][j]
-
-    for i in range(n):
-        for j in range(n):
-            if (i != j and g[i][j] < float(math.inf)):
-                PI[i][j] = i + 1
-
-    return PI, g
 
 def floyd_warshall(W):
-    global s
     n = len(W)
-    PI, g = init(W, n)
-
-    D = g
+    D = W
 
     for k in range(n):
-        print(D)
-        print (PI)
-        print("\n")
         for i in range(n):
             for j in range(n):
-                if D[i][j] < D[i][k] * D[k][j]:
+                if ((i == j) or (i == k) or (k == j)):
+                    pass
+                elif D[i][j] < D[i][k] * D[k][j]:
                     D[i][j] = D[i][k] * D[k][j]
-                    PI[i][j] = PI[k][j]
 
-
-    # get the probabilities
-
-    print_all_paths(PI, 0, 4)
-    print("P({}, {}): {} \n".format(0, 4, s))
-
+    print("{0:.6f} percent".format(D[0][n-1]*100.0))
 
 
 def main():
-    n_vertices, m_edges = [int(n) for n in input().split()]
+    try:
+        try:
+            n_vertices, m_edges = [int(n) for n in input().split()]
+            matrix = [[0 for i in range(n_vertices)] for j in range(n_vertices)]
 
-    matrix = [[0.0 for i in range(n_vertices)] for j in range(n_vertices)]
+            for n in range(m_edges):
+                i, j, p = [int(n) for n in input().split()]
+                matrix[i-1][j-1] = p/100.0
+                matrix[j-1][i-1] = p/100.0
 
-    for n in range(m_edges):
-        i, j, p = [int(n) for n in input().split()]
-        matrix[i-1][j-1] = p
-        matrix[j-1][i-1] = p
-    
-    #print (matrix)
-    floyd_warshall(matrix)
+            floyd_warshall(matrix)
+        except ValueError:
+            pass
+    except:
+        pass
 
 if __name__ == '__main__':
+    try:
+        input = raw_input
+    except NameError:
+        pass
+    
     main()
