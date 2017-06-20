@@ -3,10 +3,7 @@
 #   10/0091008 - Aline Lais Gomes Tavares
 #
 #    Para executar: 
-#      BFS:             python main.py -b
 #      Dijkstra:        python main.py -d
-#      Bellman-Ford:    python main.py -bf
-#      Floyd-Warshall:  python main.py -fw
 #
 
 
@@ -22,7 +19,7 @@ S = []
 def initialize_single_source(G, s):
     for v in G:
         v_id = v.get_id()
-        d[v_id] = math.inf
+        d[v_id] = float('inf')
         pi[v_id] = None
 
     d[s.get_id()] = 0.0
@@ -31,7 +28,7 @@ def initialize_single_source(G, s):
 
 
 def extract_min(queue, s):
-    min_distance = math.inf
+    min_distance = float('inf')
     min_id = 0
     for v in d:
         if d[v] < min_distance:

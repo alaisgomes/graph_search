@@ -2,7 +2,7 @@
 #   TAG - Teoria e Aplicacao de Grafos
 #   10/0091008 - Aline Lais Gomes Tavares
 #   Executar:
-#       python uri_1655.py < input
+#       python3 uri_1655.py < input
 
 
 def floyd_warshall(W):
@@ -17,7 +17,7 @@ def floyd_warshall(W):
                 elif D[i][j] < D[i][k] * D[k][j]:
                     D[i][j] = D[i][k] * D[k][j]
 
-    print("{0:.6f} percent".format(D[0][n-1]*100.0))
+    print("{0:.6f} percent\n".format(D[0][n-1]*100.0))
 
 
 def main():

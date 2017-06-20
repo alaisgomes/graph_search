@@ -7,6 +7,7 @@
 #      Dijkstra:        python main.py -d
 #      Bellman-Ford:    python main.py -bf
 #      Floyd-Warshall:  python main.py -fw
+#      Prim:            python main.py -p
 #
 
 import json

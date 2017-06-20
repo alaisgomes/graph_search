@@ -7,7 +7,9 @@
 #      Dijkstra:        python main.py -d
 #      Bellman-Ford:    python main.py -bf
 #      Floyd-Warshall:  python main.py -fw
+#      Prim:            python main.py -p
 #
+
 
 import sys
 import collections
@@ -17,6 +19,7 @@ from search.data_structures import Tree, Vertex, Graph
 from search.dijkstra import dijkstra, bellman_ford
 from search.bfs import BFS
 from search.floyd_warshall import floyd_warshall
+from search.prim import prim
 
 def print_structures(g):
     for v in g:
@@ -89,7 +92,14 @@ def main():
                     ".format(v.get_id(), bellman_ford(G,v))) 
 
         elif ("-fw" in sys.argv):
-            floyd_warshall(G) 
+            floyd_warshall(G)
+
+        elif ("-p" in sys.argv):
+            for v in G:
+                print ("r = {}. prim() return:\n {} \n \
+                    ".format(v.get_id(), prim(G, v))) 
+                
+                break  
                 
 
         else:
@@ -106,10 +116,15 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-    # except:
-    #     print("Error: Unexpected error happened.")
+    except:
+        print("Error: Unexpected error happened.")
 
 
 
 if __name__ == '__main__':
+    try:
+        input = raw_input
+    except NameError:
+        pass
+
     main()

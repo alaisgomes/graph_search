@@ -4,9 +4,6 @@
 #
 #    Para executar: 
 #      BFS:             python main.py -b
-#      Dijkstra:        python main.py -d
-#      Bellman-Ford:    python main.py -bf
-#      Floyd-Warshall:  python main.py -fw
 #
 
 
