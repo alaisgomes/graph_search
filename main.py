@@ -99,7 +99,7 @@ def main():
                 print ("r = {}. prim() return:\n {} \n \
                     ".format(v.get_id(), prim(G, v))) 
                 
-                break  
+                 
                 
 
         else:
@@ -116,8 +116,8 @@ def main():
     except SyntaxError as e:
         print("Syntax Error: Input provided wrongly.")
 
-    except:
-        print("Error: Unexpected error happened.")
+    # except:
+    #     print("Error: Unexpected error happened.")
 
 
 
