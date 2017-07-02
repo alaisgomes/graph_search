@@ -20,6 +20,7 @@ from search.dijkstra import dijkstra, bellman_ford
 from search.bfs import BFS
 from search.floyd_warshall import floyd_warshall
 from search.prim import prim
+from search.kruskal import kruskal
 
 def print_structures(g):
     for v in g:
@@ -98,9 +99,9 @@ def main():
             for v in G:
                 print ("r = {}. prim() return:\n {} \n \
                     ".format(v.get_id(), prim(G, v))) 
-                
-                 
-                
+
+        elif ("-k" in sys.argv):
+            kruskal(G)
 
         else:
             raise ValueError("Choose an algorithm to use:\n \

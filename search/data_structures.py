@@ -14,6 +14,7 @@ import json
 import collections
 
 
+
 class Vertex:
     def __init__(self, node):
         self.id = node
@@ -39,6 +40,7 @@ class Graph:
     def __init__(self, direction=True):
         self.vertices_dict = collections.OrderedDict()
         self.num_vertices = 0
+        self.num_edges = 0
         self.direction = direction
 
     def __iter__(self):
@@ -78,16 +80,28 @@ class Graph:
             self.add_vertex(to)
 
         if (self.direction):
+            self.num_edges += 1
             self.vertices_dict[frm].add_neighbor(self.vertices_dict[to], cost)
         else:
+            self.num_edges += 2
             self.vertices_dict[frm].add_neighbor(self.vertices_dict[to], cost)
             self.vertices_dict[to].add_neighbor(self.vertices_dict[frm], cost)
+
 
     def get_vertices(self):
         return self.vertices_dict.keys()
 
+    def get_n_vertices(self):
+        return self.num_vertices
+
+    def get_n_edges(self):
+        return self.num_edges
+
     def reorder_graph(self, vertex_key):
         self.vertices_dict.move_to_end(vertex_key,last=False)
+
+
+
 
         
 
