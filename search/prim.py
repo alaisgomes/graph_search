@@ -12,7 +12,7 @@ import copy
 from .data_structures import Tree, Vertex, Graph
 #from .dijkstra import extract_min
 
-key = {}
+key = {} # d
 pi = {}
 S = []
 
