@@ -8,6 +8,7 @@
 #      Bellman-Ford:    python main.py -bf
 #      Floyd-Warshall:  python main.py -fw
 #      Prim:            python main.py -p
+#      Kruskal:         python main.py -k
 #
 
 import json
@@ -99,11 +100,6 @@ class Graph:
 
     def reorder_graph(self, vertex_key):
         self.vertices_dict.move_to_end(vertex_key,last=False)
-
-
-
-
-        
 
 
 class Tree():

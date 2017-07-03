@@ -17,7 +17,7 @@ def init(W, n):
 
     for i in range(n):
         for j in range(n):
-            if (i != j and W[i][j] < float(math.inf)):
+            if (i != j and W[i][j] < float('inf')):
                 PI[i][j] = i + 1
 
     return PI

@@ -33,7 +33,7 @@ def print_structures(g):
 def create_structures(matrix, n):
 
     if ("-fw" in sys.argv):
-        g = [[float(math.inf) for i in range(n)] for j in range(n)]
+        g = [[float('inf') for i in range(n)] for j in range(n)]
         for i in range(n):
             for j in range(n):
                 if (i == j):
@@ -101,11 +101,12 @@ def main():
                     ".format(v.get_id(), prim(G, v))) 
 
         elif ("-k" in sys.argv):
-            kruskal(G)
+            print(kruskal(G))
 
         else:
-            raise ValueError("Choose an algorithm to use:\n \
-                            -b: BFS; \n -d: Dijkstra; \n -bf: Bellman-Ford;\n -fw: Floyd-Warshall\n")
+            raise ValueError("Choose an algorithm to use: \
+                \n -b: BFS; \n -d: Dijkstra; \n -bf: Bellman-Ford;  \
+                \n -p: Prim;\n -k: Kruskal.\n")
 
 
     except ValueError as e:

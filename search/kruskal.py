@@ -1,5 +1,6 @@
 import math
 import collections
+from .data_structures import Tree, Vertex, Graph
 
 parent = collections.OrderedDict()
 rank = collections.OrderedDict()
@@ -46,10 +47,9 @@ def get_small_weight(G):
     else:
         return []
 
-def get_smallest_edge(G):
-    pass
+
 def kruskal(G):
-    A = []
+    A = Tree()
 
     for v in G:
         make_set(v)
@@ -58,8 +58,8 @@ def kruskal(G):
         vertex_set = get_small_weight(G)
         if find_set(vertex_set[0]) != find_set(vertex_set[1]):
             union(vertex_set[0], vertex_set[1])
-            A.append(vertex_set)
+            A.set_child(vertex_set[0], vertex_set[1])
     
-    print(A)
+    return A
 
 
